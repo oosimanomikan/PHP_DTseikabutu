@@ -1,0 +1,143 @@
+body
+{
+  margin              : 0;
+}
+
+#wrapper
+{
+  display              : grid;
+  grid-template        :
+  "header header header" 50px
+  "side items items" 500px
+  /1fr 1fr 1fr;
+  background           : linear-gradient(gray, whitesmoke, white);
+}
+
+.header
+{
+  grid-area            : header;
+  background-color     : black;
+  color                : white;
+}
+
+.header h3
+{
+  margin               : 10px 0px 0px 10px;
+}
+
+.header span
+{
+  margin-left          : 10px;
+}
+
+.side
+{
+  grid-area             : side;
+  margin                : 20px 60px 0px 40px;
+  height                : 200px;
+  border                : solid 1px #999;
+  background-color      : whitesmoke;
+  text-align            : center;
+}
+
+.side ul {
+  padding               : 0;
+}
+
+#item_list
+{
+  grid-area             : items;
+  display               : flex;
+  flex-wrap             : wrap;
+  height                : 30px;
+  margin-top            : 20px;
+  margin-left           : 40px;
+}
+
+#item_list .item
+{
+  border                 : solid 1px #999;
+  background-color       : whitesmoke;
+  margin                 : 3px;
+}
+
+#item_list .item ul
+{
+  padding                : 0;
+  margin                 : 2px;
+  width                  : 100px;
+  text-align             : center;
+}
+
+.price
+{
+  font-size               : 3px;
+  float                   :left;
+  text-align              : center;
+  margin-top              : 6px;
+  margin-left             : 20px;
+}
+
+.item img
+{
+  width                   : 60px;
+  height                  : 60px;
+}
+
+#item_list .item ul a
+{
+  font-size                : 3px;
+  text-decoration          : none;
+  color                    : black;
+}
+
+li
+{
+  list-style-type          :none;
+}
+
+/* 商品詳細 detail.html.twig */
+#item_detail
+{
+  grid-area                 : items;
+  margin                    : 20px 20px;
+  padding                   : 10px 5px 0px 10px;
+  border                    : solid 1px #999;
+  background-color          : whitesmoke;
+}
+
+#item_detail img
+{
+  width                     : 150px;
+  height                    : 150px;
+  margin-left               : 30%;
+}
+
+.cart_in
+{
+  text-align                 : center;
+}
+
+/* 商品カート cart.html.twig */
+#cart_list
+{
+  grid-area                   : side;
+  height                      : 150px;
+  margin                      : 20px;
+  text-align                  : center;
+  border                      : solid 1px #999;
+  background-color            : whitesmoke;
+}
+
+.item ul .name
+{
+  font-size                   : 3px;
+}
+
+.empty
+{
+  grid-area                    : items;
+  text-align                   : center;
+  margin-top                   : 50px;
+  color                        : red;
+}
