@@ -1,2 +1,1 @@
-# NAMA_PHP
-# PHP_DTseikabutu
+神徳さんに提出させて頂くための、生PHPのコードを作成しました。
