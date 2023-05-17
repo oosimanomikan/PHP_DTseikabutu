@@ -1,0 +1,9 @@
+<div class="signin">
+{% form_start method="POST" %}
+<label for="signin-id">{{ 'アカウント名'|trans }}</label>
+<input id="signin-id" name="username" type="text" placeholder="{{ 'メールアドレスを入力'|trans }}">
+<label for="signin-pass">{{ 'パスワード'|trans }}</label>
+<input id="signin-pass" name="password" type="text" placeholder="{{ 'パスワードを入力'|trans }}">
+<button name="signin" type="submit">{{ 'ログインする'|trans }}</button>
+{% form_end %}
+</div>
