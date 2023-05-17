@@ -28,7 +28,6 @@ $twig = new \Twig\Environment($loader, [
 $template = $twig->load('twig/User/Login.html.twig');
 $template->display($context);
 
-//①エラーメッセージの初期状態を空に
 $err_msg = "";
 
 //②サブミットボタンが押されたときの処理
@@ -36,26 +35,40 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // この部分で$resultを定義し、データベースからユーザー情報を取得する必要があります
-    // 以下はダミーの結果です
-    $result = [1];
+    // バリデーション
+    if (empty($username)) {
+        $err_msg = "ユーザー名が未入力です。";
+    } else if (empty($password)) {
+        $err_msg = "パスワードが未入力です。";
+    }
 
-    try {
-        //④ログイン認証ができたときの処理
-        if ($result[0] != 0){
-            header('Location: http://localhost/root/Home.php');
+    // エラーメッセージが空（バリデーションが通った）の場合、DB処理を行う
+    if (empty($err_msg)) {
+        // この部分で$resultを定義し、データベースからユーザー情報を取得する必要があります
+        // 以下はダミーの結果です
+        $result = [1];
+
+        try {
+            //④ログイン認証ができたときの処理
+            if ($result[0] != 0){
+                header('Location: http://localhost/root/Home.php');
+                exit;
+            }
+            //⑤アカウント情報が間違っていたときの処理
+            else{
+                $err_msg = "アカウント情報が間違っています。";
+            }
+        }
+        //⑥データが渡って来なかったときの処理
+        catch (\PDOException $e) {
+            echo $e->getMessage();
             exit;
         }
-        //⑤アカウント情報が間違っていたときの処理
-        else{
-            $err_msg = "アカウント情報が間違っています。";
-        }
     }
-    //⑥データが渡って来なかったときの処理
-    catch (\PDOException $e) {
-        echo $e->getMessage();
-        exit;
-    }
-
 }
 ?>
+
+
+
+
+
