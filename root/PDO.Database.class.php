@@ -1,5 +1,5 @@
 <?
-namespace nama_PHP;
+namespace root;
 
 class PDODatabase
 {

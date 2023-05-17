@@ -1,9 +1,29 @@
-<div class="signin">
-{% form_start method="POST" %}
-<label for="signin-id">{{ 'アカウント名'|trans }}</label>
-<input id="signin-id" name="username" type="text" placeholder="{{ 'メールアドレスを入力'|trans }}">
-<label for="signin-pass">{{ 'パスワード'|trans }}</label>
-<input id="signin-pass" name="password" type="text" placeholder="{{ 'パスワードを入力'|trans }}">
-<button name="signin" type="submit">{{ 'ログインする'|trans }}</button>
-{% form_end %}
-</div>
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link href="{{constant('root\\Bootstrap::APP_URL')}}css/style.css" rel="stylesheet" type="text/css" />
+<link href="{{constant('root\\Bootstrap::APP_URL')}}css/responsive.css" rel="stylesheet" type="text/css" />
+
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    {% if err_msg is not empty %}
+        <div class="alert alert-danger" role="alert">
+            {{ err_msg }}
+        </div>
+    {% endif %}
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" name="login">Login</button>
+    </form>
+</body>
+</html>

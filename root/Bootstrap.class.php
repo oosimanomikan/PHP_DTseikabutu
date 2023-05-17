@@ -1,7 +1,7 @@
 <?php
     // Bootstrapの設定に関するコード
 
-    namespace nama_PHP;
+    namespace root;
 
     date_default_timezone_set('Asia/Tokyo');
 
@@ -16,7 +16,7 @@
         const DB_TYPE = 'mysql';
 
         //macユーザーは下段
-        const APP_DIR = '/Applications/MAMP/htdocs/DT/';
+        const APP_DIR = '/Applications/MAMP/htdocs/nama_PHP/';
         
         //const APP_DIR = '/Applications/XAMPP/xamppfiles/htdocs/DT/';
         const TEMPLATE_DIR = self::APP_DIR . 'twig/';
@@ -26,6 +26,8 @@
         const APP_URL = 'http://localhost:8888/nama_PHP/';
 
         const ENTRY_URL = self::APP_URL . 'root/';
+
+        
       
         
         public static function loadClass($class)
@@ -36,7 +38,7 @@
     }
     // これを実行しないとオートローダーとして動かない
     spl_autoload_register([
-    'shopping\Bootstrap',
+    'root\Bootstrap',
     'loadClass'
     ]);
 ?>
