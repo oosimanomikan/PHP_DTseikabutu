@@ -3,6 +3,7 @@ namespace root;
 
 class PDODatabase
 {
+    protected $pdo;
     private $dbh = null;
     private $db_host = '';
     private $db_user = '';
@@ -55,6 +56,11 @@ class PDODatabase
         }
         return $dbh;
     }
+
+    public function prepare($sql) {
+        return $this->pdo->prepare($sql);
+    }
+
 
     public function carts()
     {

@@ -17,6 +17,28 @@ class Session
         $this->db = $db;
     }
 
+    public function logout() {
+        // セッション変数を全て削除
+        $_SESSION = array();
+
+        
+
+        // セッションを切断するにはセッションクッキーも削除する
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+        
+
+        // セッションクリア
+        @session_destroy();
+    }
+
+    
+
     public function checkSession()
     {
         // セッションIDのチェック
@@ -52,8 +74,9 @@ class Session
 
     private function insertSession()
     {
-        $table = ' session ';
-        $insData = ['session_key ' => $this->session_key];
+        $table = 'session';
+        $insData = ['session_key' => $this->session_key];
+        
         $res = $this->db->insert($table, $insData);
         
         return $res;

@@ -1,8 +1,10 @@
 <?php
+namespace root\User; 
 // 必要なクラスをインクルードまたはオートロードします
 require_once dirname(__FILE__) . '/Bootstrap.class.php';
 use root\Bootstrap;
 use root\PDODatabase;
+use PDO; 
 
 // データベースに接続します
 $db = new PDODatabase(
@@ -18,7 +20,7 @@ session_start();
 $customer_no = $_SESSION['customer_no'];
 
 // ユーザーの購入履歴を取得するSQLを準備します
-$sql = 'SELECT * FROM itemes WHERE customer_no = :customer_no ORDER BY purchase_date DESC';
+$sql = 'SELECT * FROM itemes  ORDER BY id ASC';
 
 // SQLを実行します
 $stmt = $db->prepare($sql);
@@ -33,6 +35,6 @@ foreach ($purchases as $purchase) {
     echo '購入日: ' . htmlspecialchars($purchase['purchase_date'], ENT_QUOTES, 'UTF-8') . '<br>';
     echo '商品名: ' . htmlspecialchars($purchase['item_name'], ENT_QUOTES, 'UTF-8') . '<br>';
     echo '価格: ' . htmlspecialchars($purchase['price'], ENT_QUOTES, 'UTF-8') . '<br>';
-    echo '<hr>';
+    echo '<hr>'; // この行を追加
 }
 ?>

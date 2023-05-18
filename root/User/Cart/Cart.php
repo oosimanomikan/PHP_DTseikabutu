@@ -59,6 +59,6 @@
     $context = [];
     $context['cateArr'] = $cateArr;
     $context['dataArr'] = $dataArr;
-    $template = $twig->load('Cart.html.twig');
+    $template = $twig->load('twig\User\Cart.html.twig');
     $template->display($context);
 ?>

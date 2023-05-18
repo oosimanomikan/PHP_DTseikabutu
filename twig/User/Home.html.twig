@@ -1,12 +1,23 @@
-{% set page = "list" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link href="{{constant('root\\Bootstrap::APP_URL')}}css/styles.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div>
+        {% set page = "list" %}
 
-{% if page == "list" %}
-    {# $pageが"list"の場合、list.phpにリダイレクトします。#}
-    <meta http-equiv="refresh" content="0;url=root/User/List.php" />
-{% elseif page == "mypage" %}
-    {# $pageが"mypage"の場合、mypage.phpにリダイレクトします。#}
-    <meta http-equiv="refresh" content="0;url=root/User/Mypage.php" />
-{% else %}
-    {# $pageが予期せぬ値を持っていた場合のエラーハンドリングをここに書くことができます。#}
-    {{ "Unexpected value of page" }}
-{% endif %}
+        {% if page == "list" %}
+            {# $pageが"list"の場合、list.phpにリダイレクトします。#}
+            <meta http-equiv="refresh" content="0;url=root/User/List.php" />
+        {% elseif page == "mypage" %}
+            {# $pageが"mypage"の場合、mypage.phpにリダイレクトします。#}
+            <meta http-equiv="refresh" content="0;url=root/User/Mypage.php" />
+        {% else %}
+            {# $pageが予期せぬ値を持っていた場合のエラーハンドリングをここに書くことができます。#}
+            {{ "Unexpected value of page" }}
+        {% endif %}
+    </div>
+</body>
+</html>
