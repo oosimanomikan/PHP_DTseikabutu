@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Operation Result</title>
+</head>
+<body>
+    <h1>Operation Result</h1>
+
+    {% if operation == "process1" %}
+        {# 何らかの処理 #}
+        {% if success %}
+            {# 処理が成功したらメッセージを表示 #}
+            <p>処理が成功しました。csv.phpへリダイレクトされます。</p>
+        {% else %}
+            {# エラーが発生したらメッセージを表示 #}
+            <p>エラーが発生しました。Delete.phpへリダイレクトされます。</p>
+        {% endif %}
+    {% elseif operation == "process2" %}
+        {# 他の何らかの処理 #}
+        {% if success %}
+            {# 処理が成功したらメッセージを表示 #}
+            <p>処理が成功しました。Mypage.phpへリダイレクトされます。</p>
+        {% else %}
+            {# エラーが発生したらメッセージを表示 #}
+            <p>エラーが発生しました。Purchased.history.phpへリダイレクトされます。</p>
+        {% endif %}
+    {% else %}
+        {# Show.phpに遷移 #}
+        <p>Show.history.phpへリダイレクトされます。</p>
+    {% endif %}
+</body>
+</html>

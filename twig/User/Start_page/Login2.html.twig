@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link href="{{constant('root\\Bootstrap::APP_URL')}}css/styles.css" rel="stylesheet" type="text/css" />
+{# <link href="{{constant('root\\Bootstrap::APP_URL')}}css/responsive.css" rel="stylesheet" type="text/css" /> #}
+
+    <title>ログインページ</title>
+</head>
+<body>
+    <h1>ログインページ</h1>
+
+    {% if err_msg %}
+        <p>{{ err_msg }}</p>
+    {% endif %}
+
+    {# <form method="post">
+        <label for="username">ユーザ名:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">パスワード:</label><br>
+        <input type="password" id="password" name="password" required><br>
+        <input type="submit" name="login" value="ログイン">
+    </form>     #}
+
+
+        <form method="post" action="">
+        <label for="username">ユーザー名:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" required>
+
+        <input type="submit" value="ログイン">
+    </form>
+</body>
+</html>
+

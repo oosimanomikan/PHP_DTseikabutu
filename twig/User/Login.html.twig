@@ -1,25 +1,38 @@
-
-<html>
+<!doctype html>
+<html lang="ja">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<link href="{{constant('root\\Bootstrap::APP_URL')}}css/styles.css" rel="stylesheet" type="text/css" />
-<link href="{{constant('root\\Bootstrap::APP_URL')}}css/responsive.css" rel="stylesheet" type="text/css" />
+    {% include 'templates/head_tag.php' %}
 
-    <title>ログインページ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
-<body>
-    <h1>ログインページ</h1>
+<body class="text-center bg-light">
 
-    {% if err_msg %}
-        <p>{{ err_msg }}</p>
-    {% endif %}
+    {% include 'templates/header.php' %}
 
-    <form method="post">
-        <label for="username">ユーザ名:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">パスワード:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <input type="submit" name="login" value="ログイン">
+    <form class="border rounded bg-white form-login" method="post">
+
+        <link rel="styoesheet" href = "/css/style.css">
+
+        <h1 class="h3 my-3">Login</h1>
+        <div class="form-group pt-3">
+            <input type="text" class="form-control rounded-pill{{ err['name'] is defined ? ' is-invalid' }}" name="name" value="{{ name }}" placeholder="名前" required>
+            <div class="invalid-feedback">{{ err['name'] }}</div>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control rounded-pill{{ err['password'] is defined ? ' is-invalid' }}" name="password" placeholder="パスワード">
+            <div class="invalid-feedback">{{ err['password'] }}</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary text-white rounded-pill px-5 my-4">ログイン</button>
+        <input type="hidden" name="CSRF_TOKEN" value="{{ _SESSION['CSRF_TOKEN'] }}">
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
