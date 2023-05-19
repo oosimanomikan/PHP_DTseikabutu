@@ -1,11 +1,8 @@
 <?php
-    // 商品一覧を表示するプログラム、Controller
 
-    // 商品一覧を表示するプログラム、Controlle    namespace root/User/List/;
+    namespace root\User\Start_page;
 
-    namespace root;
-
-    require_once dirname(__FILE__) . '/Bootstrap.class.php';
+    require_once dirname(__FILE__) . '/../../Bootstrap.class.php';
 
     use root\Bootstrap;
     use root\PDODatabase;
@@ -42,6 +39,6 @@
     $context = [];
     $context['cateArr'] = $cateArr;
     $context['dataArr'] = $dataArr;
-    $template = $twig->load('twig\User\list.html.twig');
+    $template = $twig->load('User\list.html.twig');
     $template->display($context);
 ?>
