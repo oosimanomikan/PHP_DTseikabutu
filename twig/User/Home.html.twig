@@ -10,10 +10,10 @@
 
         {% if page == "list" %}
             {# $pageが"list"の場合、list.phpにリダイレクトします。#}
-            <meta http-equiv="refresh" content="0;url=root/User/List.php" />
+            <meta http-equiv="refresh" content="0;List.php" />
         {% elseif page == "mypage" %}
             {# $pageが"mypage"の場合、mypage.phpにリダイレクトします。#}
-            <meta http-equiv="refresh" content="0;url=root/User/Mypage.php" />
+            <meta http-equiv="refresh" content="0;Mypage.php" />
         {% else %}
             {# $pageが予期せぬ値を持っていた場合のエラーハンドリングをここに書くことができます。#}
             {{ "Unexpected value of page" }}

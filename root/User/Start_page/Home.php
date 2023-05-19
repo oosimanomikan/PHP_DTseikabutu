@@ -7,8 +7,9 @@ require_once dirname(__FILE__) . '/../../Bootstrap.class.php';
 use root\Bootstrap;
 use root\PDODatabase;
 use root\Session;
-use root\Common;
+//use root\Common;
 
+$ses = new Bootstrap();
 $ses = new Session($db);
 
 $page = "list";
@@ -18,12 +19,12 @@ $shouldRedirect = false;
 switch ($page) {
     case "list":
         // $pageが"list"の場合、list.phpにリダイレクトします。
-        $redirectLocation = 'Location: root\User\Start_page\List.php';
+        $redirectLocation = 'Location: List.php';
         $shouldRedirect = true;
         break;
     case "mypage":
         // $pageが"mypage"の場合、mypage.phpにリダイレクトします。
-        $redirectLocation = 'Location: root\User\Mypage\Mypage.php';
+        $redirectLocation = 'Location: Mypage.php';
         $shouldRedirect = true;
         break;
     default:

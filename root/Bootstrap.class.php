@@ -35,6 +35,10 @@
             //'loadClass'が未定義のクラスが存在する場合に、実行される。
             //$classには、名前空間+クラス名が格納される。
             $path = str_replace('\\', '/', self::APP_DIR . $class . '.class.php');
+
+            // var_dump(self::APP_DIR . $class . '.class.php');
+            // var_dump($class);
+
             require_once $path;
 
         }

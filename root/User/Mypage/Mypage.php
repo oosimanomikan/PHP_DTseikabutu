@@ -1,33 +1,64 @@
 <?php
-$operation = "process1"; // これはあなたのロジックに基づいて変更します。
+
+namespace root\User\Start_page;
+
+require_once dirname(__FILE__) . '/../../Bootstrap.class.php';
+
+use root\Bootstrap;
+use root\PDODatabase;
+use root\Session;
+
+// テンプレート指定
+$loader = new \Twig\Loader\FilesystemLoader(Bootstrap::TEMPLATE_DIR);
+$twig = new \Twig\Environment($loader, [
+'cache' => Bootstrap::CACHE_DIR
+]);
+
+
+$data = [];
+try {
+    // csv.phpに関する処理
+    // ...
+    $data['location'] = 'csv.php';
+} catch (\Exception $e) {
+    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
+}
 
 try {
-    if ($operation == "process1") {
-        // 何らかの処理
-
-        // 処理が成功したらcsv.phpにリダイレクト
-        header('Location: root\User\Mypage\csv.php');
-        exit();
-    } elseif ($operation == "process2") {
-        // 他の何らかの処理
-
-        // 処理が成功したらMypage.phpにリダイレクト
-        header('Location: root\User\Mypage\Mypage.php');
-        exit();
-    } else {
-        // Show.phpに遷移
-        header('Location: root\User\Mypage\Show.history.php');
-        exit();
-    }
-} catch (Exception $e) {
-    if ($operation == "process1") {
-        // エラーが発生したらDelete.phpにリダイレクト
-        header('Location: root\User\Mypage\Delete.php');
-        exit();
-    } elseif ($operation == "process2") {
-        // エラーが発生したらPurched.phpにリダイレクト
-        header('Location:root\User\Mypage\Purchased.history.php');
-        exit();
-    }
+    // Mypage.phpに関する処理
+    // ...
+    $data['location'] = 'Mypage.php';
+} catch (\Exception $e) {
+    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
 }
+
+try {
+    // history.phpに関する処理
+    // ...
+    $data['location'] = 'history.php';
+} catch (\Exception $e) {
+    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
+}
+
+try {
+    // Delete.phpに関する処理
+    // ...
+    $data['location'] = 'Delete.php';
+} catch (\Exception $e) {
+    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
+}
+
+try {
+    // history.phpに関する処理
+    // ...
+    $data['location'] = 'history.php';
+} catch (\Exception $e) {
+    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
+}
+$context = [];
+$context['err_msg'] = $err;
+$template = $twig->load('User/Start_page/Login.html.twig');
+$template->display($context);
+?>
+
 ?>
