@@ -11,27 +11,22 @@
     <h1>ログインページ</h1>
 
     {% if err_msg %}
-        <p>{{ err_msg }}</p>
+        {% for message in err_msg %}
+            <p>{{ message }}</p>
+        {% endfor %}
     {% endif %}
 
-    {# <form method="post">
-        <label for="username">ユーザ名:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">パスワード:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <input type="submit" name="login" value="ログイン">
-    </form>     #}
-
-
-        <form method="post" action="">
-        <label for="username">ユーザー名:</label>
-        <input type="text" id="username" name="username" required>
+    <form method="post" action="Login.php">
+        <label for="email">メールアドレス:</label>
+        <input type="text" id="email" name="email" required>
 
         <label for="password">パスワード:</label>
         <input type="password" id="password" name="password" required>
+        <!-- 以下の行はCSRFトークンを追加する例です -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
         <input type="submit" name="login" value="ログイン">
 
     </form>
 </body>
 </html>
-

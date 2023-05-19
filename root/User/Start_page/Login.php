@@ -25,56 +25,29 @@ $twig = new \Twig\Environment($loader, [
 'cache' => Bootstrap::CACHE_DIR
 ]);
 
+$err = [];
 
- $err_msg = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if(!$email = filter_input(INPUT_POST, 'email')) {
+        $err[] = 'メールアドレスを記入してください。';
+    }
+  
+    $password = filter_input(INPUT_POST, 'password');
+    // 正規表現
+    if (!preg_match("/\A[a-z\d]{8,20}+\z/i",$password)) {
+        $err[] = 'パスワードは英数字8文字以上20文字以下にしてください。';
+    }
 
- //②サブミットボタンが押されたときの処理
- if (isset($_POST['login'])) {
-     $username = $_POST['username'];
-    $password = $_POST['password'];
-
-//     // バリデーション
-     if (empty($username)) {
-        $err_msg = "ユーザー名が未入力です。";
-     } else if (empty($password)) {
-        $err_msg = "パスワードが未入力です。";
-     }
-
-     // エラーメッセージが空（バリデーションが通った）の場合、DB処理を行う
-     if (empty($err_msg)) {
-         // この部分で$resultを定義し、データベースからユーザー情報を取得する必要があります
-         // 以下はダミーの結果です
-         $result = [1];
-
-//         try {
-//             //④ログイン認証ができたときの処理
-//             if ($result[0] != 0){
-//                 header('Location: http://localhost/root/User/Start_page/Home.php');
-//                 exit;
-//             }
-//             //⑤アカウント情報が間違っていたときの処理
-//             else{
-//                 $err_msg = "アカウント情報が間違っています。";
-//             }
-//         }
-//         //⑥データが渡って来なかったときの処理
-//         catch (\PDOException $e) {
-//             echo $e->getMessage();
-//             exit;
-//         }
-
-
-
-     }
-    
+    $password_conf = filter_input(INPUT_POST, 'password_conf');
+    if ($password !== $password_conf) {
+        $err[] = '確認用パスワードと異なっています。';
+    }
 }
 
+
 $context = [];
+$context['err_msg'] = $err;
 $template = $twig->load('User/Start_page/Login.html.twig');
 $template->display($context);
-$context['err_msg'] = $err_msg;
-
-
 
 ?>
-
