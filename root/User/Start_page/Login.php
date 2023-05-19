@@ -25,78 +25,56 @@ $twig = new \Twig\Environment($loader, [
 'cache' => Bootstrap::CACHE_DIR
 ]);
 
-try {
-    session_start();
 
-    if (isset($_SESSION['USER'])) {
-        // ログイン済みの場合はHOME画面へ
-        redirect('/works/web/login.php');
-    }
+ $err_msg = "";
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // POST処理時
+ //②サブミットボタンが押されたときの処理
+ if (isset($_POST['login'])) {
+     $username = $_POST['username'];
+    $password = $_POST['password'];
 
-        check_token();
+//     // バリデーション
+     if (empty($username)) {
+        $err_msg = "ユーザー名が未入力です。";
+     } else if (empty($password)) {
+        $err_msg = "パスワードが未入力です。";
+     }
 
-        // 1.入力値を取得
-        $user_no = $_POST['user_no'];
-        $password = $_POST['password'];
+     // エラーメッセージが空（バリデーションが通った）の場合、DB処理を行う
+     if (empty($err_msg)) {
+         // この部分で$resultを定義し、データベースからユーザー情報を取得する必要があります
+         // 以下はダミーの結果です
+         $result = [1];
 
-        // 2.バリデーションチェック
-        $err = array();
+//         try {
+//             //④ログイン認証ができたときの処理
+//             if ($result[0] != 0){
+//                 header('Location: http://localhost/root/User/Start_page/Home.php');
+//                 exit;
+//             }
+//             //⑤アカウント情報が間違っていたときの処理
+//             else{
+//                 $err_msg = "アカウント情報が間違っています。";
+//             }
+//         }
+//         //⑥データが渡って来なかったときの処理
+//         catch (\PDOException $e) {
+//             echo $e->getMessage();
+//             exit;
+//         }
 
-        if (!$user_no) {
-            $err['user_no'] = '社員番号を入力してください。';
-        } elseif (!preg_match('/^[0-9]+$/', $user_no)) {
-            $err['user_no'] = '社員番号を正しく入力してください。';
-        } elseif (mb_strlen($user_no, 'utf-8') > 20) {
-            $err['user_no'] = '社員番号が長すぎます。';
-        }
 
-        if (!$password) {
-            $err['password'] = 'パスワードを入力してください。';
-        }
 
-        if (empty($err)) {
-            // 3.データベースに照合
-            $pdo = connect_db();
-
-            $sql = "SELECT * FROM user WHERE user_no = :user_no LIMIT 1";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':user_no', $user_no, PDO::PARAM_STR);
-            $stmt->execute();
-            $user = $stmt->fetch();
-
-            if ($user && password_verify($password, $user['password'])) {
-                // 4.ログイン処理（セッションに保存）
-                $_SESSION['USER'] = $user;
-
-                // 5.HOME画面へ遷移
-                redirect('/works/web/login.php');
-            } else {
-                $err['password'] = '認証に失敗しました。';
-            }
-        }
-    } else {
-        // 画面初回アクセス時
-        $user_no = "";
-        $password = "";
-
-        set_token();
-    }
-
-    $page_title = 'ログイン';
-} catch (Exception $e) {
-    echo  $e;
-    //redirect('/works/web/error.php');
+     }
+    
 }
- 
+
 $context = [];
-$template = $twig->load('User/Login.html.twig');
+$template = $twig->load('User/Start_page/Login.html.twig');
 $template->display($context);
+$context['err_msg'] = $err_msg;
+
+
 
 ?>
-
-
-
 
