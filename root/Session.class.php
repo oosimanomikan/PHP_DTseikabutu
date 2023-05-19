@@ -82,13 +82,13 @@ class Session
         return $res;
     }
 
-    public function getSession($key) {
-        return $_SESSION[$key] ?? null;
-    }
+    // public function getSession($key) {
+    //     return $_SESSION[$key] ?? null;
+    // }
 
-    public function setSession($key, $value) {
-        // セッションにキーと値を設定する
-        $_SESSION[$key] = $value;
-    }
+    // public function setSession($key, $value) {
+    //     // セッションにキーと値を設定する
+    //     $_SESSION[$key] = $value;
+    // }
 }
 ?>

@@ -9,23 +9,23 @@
 </head>
 <body>
     <h1>ログインページ</h1>
-
-    {% if err_msg %}
-        {% for message in err_msg %}
-            <p>{{ message }}</p>
-        {% endfor %}
+  {% if err_msg is not empty %}
+        <div class="errors">
+            {% for error in err_msg %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
     {% endif %}
 
-    <form method="post" action="Login.php">
-        <label for="email">メールアドレス:</label>
-        <input type="text" id="email" name="email" required>
-
-        <label for="password">パスワード:</label>
-        <input type="password" id="password" name="password" required>
-        <!-- 以下の行はCSRFトークンを追加する例です -->
-        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-
-        <input type="submit" name="login" value="ログイン">
+    <form action="" method="post">
+        <label for="email">メールアドレス:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="password">パスワード:</label><br>
+        <input type="password" id="password" name="password" required><br>
+     
+        {# CSRF対策 - トークンを含む
+        <input type="hidden" name="token" value="{{ csrf_token }}"> #}
+        <input type="submit" value="Login">
 
     </form>
 </body>
