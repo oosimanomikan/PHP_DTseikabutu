@@ -7,7 +7,7 @@
     use root\Bootstrap;
     use root\PDODatabase;
     use root\Session;
-    use root\Item;
+    use root\User\Cart\Items;
     
     $db = new PDODatabase(
         Bootstrap::DB_HOST,
@@ -28,18 +28,18 @@
     ]);
     
     // SessionKeyを見て、DBへの登録状態をチェックする
-    $ses->checkSession();
+    // $ses->checkSession();
     
-    // カテゴリーリスト(一覧)を取得する
-    $cateArr = $itm->getCategoryList();
+    // // カテゴリーリスト(一覧)を取得する
+    // $cateArr = $itm->getCategoryList();
     
-    // 商品リストを取得する
-    $ctg_id = (isset($_GET['ctg_id']) === true && preg_match('/^[0-9]+$/', $_GET['ctg_id']) === 1) ? $_GET['ctg_id'] : '';
-    $dataArr = $itm->getItemList($ctg_id);
+    // // 商品リストを取得する
+    // $ctg_id = (isset($_GET['ctg_id']) === true && preg_match('/^[0-9]+$/', $_GET['ctg_id']) === 1) ? $_GET['ctg_id'] : '';
+    // $dataArr = $itm->getItemList($ctg_id);
     
     $context = [];
-    $context['cateArr'] = $cateArr;
-    $context['dataArr'] = $dataArr;
-    $template = $twig->load('User\list.html.twig');
+    // $context['cateArr'] = $cateArr;
+    // $context['dataArr'] = $dataArr;
+    $template = $twig->load('User/Start_page/List.html.twig');
     $template->display($context);
 ?>

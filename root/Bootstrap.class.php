@@ -36,8 +36,8 @@
             //$classには、名前空間+クラス名が格納される。
             $path = str_replace('\\', '/', self::APP_DIR . $class . '.class.php');
 
-            var_dump(self::APP_DIR . $class . '.class.php');
-             var_dump($class);
+           
+            //  var_dump($path);
 
             require_once $path;
 

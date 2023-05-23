@@ -29,14 +29,10 @@ $twig = new \Twig\Environment($loader, [
 $err = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // CSRF対策 - トークンを確認
-    // if ($_POST["token"] != $ses->getSession('token')) {
-    //     $err[] = '不正なリクエストです。';
-    // } else {
-        // $email = filter_input(INPUT_POST, 'email');
-        // if (!$email) {
-        //     $err[] = 'メールアドレスを記入してください。';
-        // }
+
+
+
+var_dump($_POST); 
 
        
 
