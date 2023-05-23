@@ -1,6 +1,6 @@
 <?php
-namespace root;
 
+namespace root;
 class PDODatabase
 {
     protected $pdo;
@@ -25,10 +25,12 @@ class PDODatabase
             $db_name,
             $db_type
         );
+        $this->pdo = $this->dbh;
         $this->db_host = $db_host;
         $this->db_user = $db_user;
         $this->db_pass = $db_pass;
         $this->db_name = $db_name;
+        $this->db_type = $db_type;
     }
 
     private function connectDB(
@@ -61,4 +63,3 @@ class PDODatabase
         return $this->pdo->prepare($sql);
     }
 }
-?>

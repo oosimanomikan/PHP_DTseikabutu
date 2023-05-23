@@ -1,6 +1,6 @@
 <?php
 
-namespace root\User\Start_page;
+namespace root\User\Mypage;
 
 require_once dirname(__FILE__) . '/../../Bootstrap.class.php';
 
@@ -14,51 +14,17 @@ $twig = new \Twig\Environment($loader, [
 'cache' => Bootstrap::CACHE_DIR
 ]);
 
+$err = [];
+if  (isset($_POST["csv.php"])) :
+    $csv = $_POST["csv.php"];
+    // Do something with $csv here
+    // Assuming you are validating something and it fails, you can push the error message to $err array
+    // $err[] = 'Validation failed!';
+endif;
 
-$data = [];
-try {
-    // csv.phpに関する処理
-    // ...
-    $data['location'] = 'csv.php';
-} catch (\Exception $e) {
-    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
-}
-
-try {
-    // Mypage.phpに関する処理
-    // ...
-    $data['location'] = 'Mypage.php';
-} catch (\Exception $e) {
-    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
-}
-
-try {
-    // history.phpに関する処理
-    // ...
-    $data['location'] = 'history.php';
-} catch (\Exception $e) {
-    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
-}
-
-try {
-    // Delete.phpに関する処理
-    // ...
-    $data['location'] = 'Delete.php';
-} catch (\Exception $e) {
-    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
-}
-
-try {
-    // history.phpに関する処理
-    // ...
-    $data['location'] = 'history.php';
-} catch (\Exception $e) {
-    $data['error'] = 'エラーが発生しているため、ご希望のページに移動できません';
-}
 $context = [];
 $context['err_msg'] = $err;
-$template = $twig->load('User/Start_page/Login.html.twig');
+$template = $twig->load('User/Mypage/Mypage.html.twig');
 $template->display($context);
-?>
 
 ?>

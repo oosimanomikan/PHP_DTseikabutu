@@ -25,7 +25,7 @@ $twig = new \Twig\Environment($loader, [
 'cache' => Bootstrap::CACHE_DIR
 ]);
 
-$template = $twig->load('twig/User/Login.html.twig');
+$template = $twig->load('User/Login.html.twig');
 $template->display($context);
 
 $err_msg = "";

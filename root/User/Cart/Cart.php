@@ -1,6 +1,6 @@
 <?php
 
-    namespace root;
+    namespace root\User\Cart;
 
     require_once dirname(__FILE__) . '/Bootstrap.class.php';
 

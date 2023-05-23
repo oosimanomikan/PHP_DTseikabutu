@@ -6,6 +6,8 @@ require_once dirname(__FILE__) . '/../../Bootstrap.class.php';
 use root\Bootstrap;
 use root\PDODatabase;
 use root\Session;
+//use root\Commoon;
+
 
 $db = new PDODatabase(
      Bootstrap::DB_HOST,
@@ -16,6 +18,7 @@ $db = new PDODatabase(
 );
 
 $ses = new Session($db);
+//$con = new Common($db);
 
 // テンプレート指定
 $loader = new \Twig\Loader\FilesystemLoader(Bootstrap::TEMPLATE_DIR);
@@ -30,10 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // if ($_POST["token"] != $ses->getSession('token')) {
     //     $err[] = '不正なリクエストです。';
     // } else {
-        $email = filter_input(INPUT_POST, 'email');
-        if (!$email) {
-            $err[] = 'メールアドレスを記入してください。';
-        }
+        // $email = filter_input(INPUT_POST, 'email');
+        // if (!$email) {
+        //     $err[] = 'メールアドレスを記入してください。';
+        // }
+
+       
 
         $password = filter_input(INPUT_POST, 'password');
         if ($password === false || $password === '') {
@@ -57,6 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //}
 }
 
+if (isset($_POST['email']) === false) {
+    $dataArr['email'] = "";
+}
 
 
 // CSRF対策 - トークンの生成

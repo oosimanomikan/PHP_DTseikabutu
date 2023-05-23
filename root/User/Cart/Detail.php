@@ -1,7 +1,7 @@
 <?php
     // 商品詳細を表示するプログラム、Controller
     
-    namespace root;
+    namespace root\User\Cart;
 
     require_once dirname(__FILE__) . '/Bootstrap.class.php';
     

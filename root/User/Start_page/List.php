@@ -18,7 +18,8 @@
     );
     
     $ses = new Session($db);
-    $itm = new Item($db);
+    $itm = new Items($db);
+
     
     // テンプレート指定
     $loader = new \Twig\Loader\FilesystemLoader(Bootstrap::TEMPLATE_DIR);

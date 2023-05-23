@@ -5,29 +5,14 @@
     <title>Operation Result</title>
 </head>
 <body>
-    <h1>Operation Result</h1>
+ <ul>
+    <li><a href="{{root/User/Mypage}}csv.php">csv.php</a></li>
 
-    {% if operation == "process1" %}
-        {# 何らかの処理 #}
-        {% if success %}
-            {# 処理が成功したらメッセージを表示 #}
-            <p>処理が成功しました。csv.phpへリダイレクトされます。</p>
-        {% else %}
-            {# エラーが発生したらメッセージを表示 #}
-            <p>エラーが発生しました。Delete.phpへリダイレクトされます。</p>
-        {% endif %}
-    {% elseif operation == "process2" %}
-        {# 他の何らかの処理 #}
-        {% if success %}
-            {# 処理が成功したらメッセージを表示 #}
-            <p>処理が成功しました。Mypage.phpへリダイレクトされます。</p>
-        {% else %}
-            {# エラーが発生したらメッセージを表示 #}
-            <p>エラーが発生しました。Purchased.history.phpへリダイレクトされます。</p>
-        {% endif %}
-    {% else %}
-        {# Show.phpに遷移 #}
-        <p>Show.history.phpへリダイレクトされます。</p>
-    {% endif %}
+
+    <li><a href="{{ root/User/Mypage }}Purchased.history.php">Purchased.history.php</a></li>
+    <li><a href="{{ root/User/Mypage }}Delete.php">Delete.php</a></li>
+    <li><a href="{{ root/User/Mypage }}Show.history.php">Show.history.php</a></li>
+</ul>
+
 </body>
 </html>

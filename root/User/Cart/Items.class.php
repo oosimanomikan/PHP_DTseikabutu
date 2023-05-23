@@ -1,6 +1,6 @@
 <?php
-namespace root;
-class Item
+namespace root\User\Cart;
+class Items
     {
         public $cateArr = [];
         public $db = null;
@@ -13,20 +13,20 @@ class Item
         // カテゴリーリストの取得
         public function getCategoryList()
         {
-            $table = ' category ';
-            $col = ' ctg_id, category_name ';
+            $table = ' categories ';
+            $col = ' id, name ';
             $res = $this->db->select($table, $col);
             return $res;
         }
 
         // 商品リストを取得する
-        public function getItemList($ctg_id)
+        public function getItemList($id)
         {
             // カテゴリーによって表示させるアイテムをかえる
-            $table = ' item ';
-            $col = ' item_id, item_name, price,image, ctg_id ';
-            $where = ($ctg_id !== '') ? ' ctg_id = ? ' : '';
-            $arrVal = ($ctg_id !== '') ? [$ctg_id] : [];
+            $table = ' items ';
+            $col = ' id, name, detail, price,quantity,image_name,gender,category_id ';
+            $where = ($id !== '') ? ' id = ? ' : '';
+            $arrVal = ($id !== '') ? [$id] : [];
             
             $res = $this->db->select($table, $col, $where, $arrVal);
             
@@ -34,15 +34,14 @@ class Item
         }
 
         // 商品の詳細情報を取得する
-        public function getItemDetailData($item_id)
+        public function getItemDetailData($id)
         {
-            $table = ' item ';
-            $col = ' item_id, item_name, detail, price, image, ctg_id ';
-            
-            $where = ($item_id !== '') ? ' item_id = ? ' : '';
+            $table = ' items ';
+            $col = ' id, name, detail, price,quantity,image_name,gender,category_id ';
+            $where = ($id !== '') ? ' id = ? ' : '';
             
             // カテゴリーによって表示させるアイテムをかえる
-            $arrVal = ($item_id !== '') ? [$item_id] : [];
+            $arrVal = ($id !== '') ? [$id] : [];
             
             $res = $this->db->select($table, $col, $where, $arrVal);
             
