@@ -1,20 +1,14 @@
 <?php
 namespace root;
-
-require_once dirname(__FILE__) . '/../../Bootstrap.class.php';
-
-// use root\PDODatabase;
-
-class Common
+class Common                                                                                                                               
 {
     private $dataArr = [];
+
     private $errArr = [];
-    private $dbh; 
 
     //初期化
-    public function __construct(PDODatabase $dbh)
+    public function __construct()
     {
-        $this->dbh = $dbh;  
     }
 
     public function errorCheck($dataArr)
@@ -22,117 +16,51 @@ class Common
         $this->dataArr = $dataArr;
 
         //クラス内のメソッドを読み込む
-        $this->carts();
-        $this->categories();
-        $this->items();
-        $this->sessions();
+        $this->createErrorMessage();
+
         $this->mailCheck();
-        $this->users();
-       
+        $this->passwordCheck(); // メソッド名をpasswordCheckに変更
 
         return $this->errArr;
     }
 
-    public function carts()
+    private function createErrorMessage()
     {
-        // プリペアドステートメントの準備
-        $stmt = $this->dbh->prepare('SELECT * FROM carts');
-
-        // プリペアドステートメントの実行
-        $stmt->execute();
-
-        // 結果の取得
-        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-        // 結果の表示
-        foreach ($result as $row) {
-            for ($i = 1; $i <= 8; $i++) {
-                echo 'カラム' . $i . '<br>';
-            }
+        foreach ($this->dataArr as $key => $val){
+            $this->errArr[$key] = '';
         }
     }
 
-    public function categories()
+    private function mailCheck()
     {
-        // プリペアドステートメントの準備
-        $stmt = $this->dbh->prepare('SELECT * FROM categories');
+        if ($this->dataArr['email'] === ''){
+            $this->errArr['email'] = 'メールアドレスもしくは、パスワードを正しい形式で入力してください';
+        }
 
-        // プリペアドステートメントの実行
-        $stmt->execute();
-
-        // 結果の取得
-        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-        // 結果の表示
-        foreach ($result as $row) {
-            for ($i = 1; $i <= 3; $i++) {
-                echo 'カラム' . $i . '<br>';
-            }
+        if(preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+[a-zA-Z0-9\._-]+$/', $this->dataArr['email']) === 0){
+            $this->errArr['email'] = 'メールアドレス入力の正しい形式に沿って、再入力してください';
         }
     }
 
-    public function items()
+    private function passwordCheck() // メソッド名をpasswordCheckに変更
     {
-        // プリペアドステートメントの準備
-        $stmt = $this->dbh->prepare('SELECT * FROM items');
-
-        // プリペアドステートメントの実行
-        $stmt->execute();
-
-        // 結果の取得
-        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-        // 結果の表示
-        foreach ($result as $row) {
-            for ($i = 1; $i <= count($row); $i++) {
-                echo 'カラム' . $i . '<br>';
-            }
+        if ($this->dataArr['password'] === ''){
+            $this->errArr['password'] = 'メールアドレスもしくは、パスワードを正しい形式で入力してください';
+        }
+        
+        if(!preg_match('/^.{6,20}$/', $this->dataArr['password'])){
+            $this->errArr['password'] = 'パスワードは6文字以上20文字以下で入力してください';
         }
     }
-    
-        public function sessions()
-        {
-            // プリペアドステートメントの準備
-            $stmt = $this->dbh->prepare('SELECT * FROM sessions');
-    
-            // プリペアドステートメントの実行
-            $stmt->execute();
-    
-            // 結果の取得
-            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    
-            // 結果の表示
-            foreach ($result as $row) {
-                for ($i = 1; $i <= count($row); $i++) {
-                    echo 'カラム' . $i . '<br>';
-                }
+
+    public function getErrorFlg()
+    {
+        $err_check = true;
+        foreach($this->errArr as $key => $value) {
+            if($value !== '') {
+               $err_check = false;
             }
         }
-    
-        public function mailCheck()
-        {
-            if(preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+[a-zA-Z0-9\._-]+$/', $this->dataArr['email']) === 0){
-                $this->errArr['email'] = 'メールアドレスを正しい形式で入力してください';
-            }
-        }
-    
-        public function users()
-        {
-            // プリペアドステートメントの準備
-            $stmt = $this->dbh->prepare('SELECT * FROM users');
-    
-            // プリペアドステートメントの実行
-            $stmt->execute();
-    
-            // 結果の取得
-            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    
-            // 結果の表示
-            foreach ($result as $row) {
-                for ($i = 1; $i <= count($row); $i++) {
-                    echo 'カラム' . $i . '<br>';
-                }
-            }
-        }
+        return $err_check;
     }
-    
+}
