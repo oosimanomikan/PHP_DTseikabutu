@@ -22,9 +22,6 @@
         <input type="email" id="email" name="email" required><br>
         <label for="password">パスワード:</label><br>
         <input type="password" id="password" name="password" required><br>
-     
-        {# CSRF対策 - トークンを含む
-        <input type="hidden" name="token" value="{{ csrf_token }}"> #}
         <input type="submit" value="Login">
 
     </form>

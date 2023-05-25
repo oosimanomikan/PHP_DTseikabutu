@@ -1,6 +1,6 @@
 <?php
 namespace root;
-class Common                                                                                                                               
+class Validation                                                                                                                               
 {
     private $dataArr = [];
 
@@ -35,10 +35,6 @@ class Common
     {
         if ($this->dataArr['email'] === ''){
             $this->errArr['email'] = 'メールアドレスもしくは、パスワードを正しい形式で入力してください';
-        }
-
-        if(preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+[a-zA-Z0-9\._-]+$/', $this->dataArr['email']) === 0){
-            $this->errArr['email'] = 'メールアドレス入力の正しい形式に沿って、再入力してください';
         }
     }
 
